@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: groovelab-frontend
+  namespace: groovelab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: groovelab-frontend
+  template:
+    metadata:
+      labels:
+        app: groovelab-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: arunhotra/groovelab-frontend:latest
+          imagePullPolicy: Always
+          # Frontend was built with VITE_API_BASE=/api in CI
+          ports:
+            - containerPort: 5173
+          resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: groovelab-frontend
+  namespace: groovelab
+spec:
+  type: ClusterIP
+  selector:
+    app: groovelab-frontend
+  ports:
+    - port: 80
+      targetPort: 80

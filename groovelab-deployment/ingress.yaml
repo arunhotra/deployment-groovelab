@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: groovelab
+  namespace: groovelab
+  annotations:
+    ingressClassName: "nginx"
+
+spec:
+  rules:
+  - host: groovelab.127.0.0.1.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix   
+        backend:
+          service:
+            name: groovelab-frontend
+            port:
+              number: 80
+      - path: /api/playlist
+        pathType: Prefix   
+        backend:
+          service:
+            name: groovelab-backend
+            port:
+              number: 5000

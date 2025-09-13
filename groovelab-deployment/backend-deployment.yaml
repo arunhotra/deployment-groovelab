@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: groovelab-backend
+  namespace: groovelab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: groovelab-backend
+  template:
+    metadata:
+      labels:
+        app: groovelab-backend
+    spec:
+      containers:
+        - name: backend
+          image: "arunhotra/groovelab-backend"
+          imagePullPolicy: Always
+          env:
+            # mount your Spotify creds via a Secret (created below)
+            - name: SPOTIFY_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: groovelab-secrets
+                  key: spotifyClientId
+            - name: SPOTIFY_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: groovelab-secrets
+                  key: spotifyClientSecret
+          ports:
+            - containerPort: 5000
+          resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: groovelab-backend
+  namespace: groovelab
+spec:
+  type: ClusterIP
+  selector:
+    app: groovelab-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
