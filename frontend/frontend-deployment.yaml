@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: arunhotra/groovelab-frontend:f5d65f3b12a8b4baad0f51174d8c95caf07ab3ab
+          image: arunhotra/groovelab-frontend:c16258a52552c79bd10d4d8152b97004831d3237
           imagePullPolicy: Always
           # Frontend was built with VITE_API_BASE=/api in CI
           ports:
