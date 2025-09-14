@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: groovelab
 resources:
   - namespace.yaml
-  - backend-deployment.yaml
-  - frontend-deployment.yaml
+  - backend/backend-deployment.yaml
+  - frontend/frontend-deployment.yaml
   - ingress.yaml

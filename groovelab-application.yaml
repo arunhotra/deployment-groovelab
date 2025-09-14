@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/arunhotra/groovelab-deployment'
-    targetRevision: main
+    repoURL: 'https://github.com/arunhotra/deployment-groovelab'
+    targetRevision: groove
     path: .
   destination:
     server: https://kubernetes.default.svc
